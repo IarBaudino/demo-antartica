@@ -51,6 +51,10 @@ export const siteSettingsSchema = z.object({
       z.string().regex(/^\d{8,15}$/, "Solo dígitos, 8 a 15 caracteres"),
     ]),
   }),
+  social: z.object({
+    instagramUrl: z.union([z.literal(""), z.string().url()]),
+    instagramHandle: z.string(),
+  }),
   googleReviews: z.object({
     enabled: z.boolean(),
     placeId: z.string(),

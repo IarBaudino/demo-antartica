@@ -13,24 +13,31 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import type { SiteSettings } from "@/types/site-settings";
+import { rememberDemoInquiry } from "@/lib/demo/inbox";
+import { cn } from "@/lib/utils";
+
+type RelatedKind = "excursion" | "package" | "viaje";
 
 type InquiryFormProps = {
   inquiry: SiteSettings["inquiry"];
+  related?: { kind: RelatedKind; slug?: string; title?: string };
+  variant?: "band" | "card";
 };
 
 function relatedLabel(kind?: string) {
   if (kind === "package") return "paquete";
   if (kind === "excursion") return "excursión";
-  return "producto";
+  if (kind === "viaje") return "viaje";
+  return "consulta";
 }
 
-export function InquiryForm({ inquiry }: InquiryFormProps) {
+export function InquiryForm({ inquiry, related, variant = "band" }: InquiryFormProps) {
   const searchParams = useSearchParams();
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [relatedKind, setRelatedKind] = useState<"excursion" | "package" | undefined>();
-  const [relatedSlug, setRelatedSlug] = useState("");
-  const [relatedTitle, setRelatedTitle] = useState("");
+  const [relatedKind, setRelatedKind] = useState<RelatedKind | undefined>(related?.kind);
+  const [relatedSlug, setRelatedSlug] = useState(related?.slug ?? "");
+  const [relatedTitle, setRelatedTitle] = useState(related?.title ?? "");
 
   const {
     register,
@@ -49,14 +56,21 @@ export function InquiryForm({ inquiry }: InquiryFormProps) {
   useEffect(() => {
     const kindRaw = searchParams.get("consulta")?.trim() || searchParams.get("kind")?.trim();
     const kind =
-      kindRaw === "excursion" || kindRaw === "package" ? kindRaw : undefined;
+      kindRaw === "excursion" || kindRaw === "package" || kindRaw === "viaje" ? kindRaw : undefined;
     const slug = searchParams.get("slug")?.trim() || "";
     const title = searchParams.get("titulo")?.trim() || searchParams.get("title")?.trim() || "";
+
+    if (related) {
+      setRelatedKind(related.kind);
+      setRelatedSlug(related.slug ?? "");
+      setRelatedTitle(related.title ?? "");
+      return;
+    }
 
     setRelatedKind(kind);
     setRelatedSlug(slug);
     setRelatedTitle(title);
-  }, [searchParams]);
+  }, [searchParams, related]);
 
   async function onSubmit(data: InquiryFormFields) {
     setSubmitStatus("idle");
@@ -80,6 +94,13 @@ export function InquiryForm({ inquiry }: InquiryFormProps) {
         throw new Error(json.error ?? "Error al enviar la consulta");
       }
 
+      rememberDemoInquiry({
+        name: data.name,
+        email: data.email,
+        message: data.message,
+        relatedTitle,
+        relatedSlug,
+      });
       setSubmitStatus("success");
       reset();
     } catch (err) {
@@ -88,23 +109,38 @@ export function InquiryForm({ inquiry }: InquiryFormProps) {
     }
   }
 
+  const card = variant === "card";
+
   return (
-    <section id="consulta" className="scroll-mt-24 bg-meru-primary py-20 text-white">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6">
-        <div className="text-center">
-          <h2 className="text-3xl text-white">{inquiry.title}</h2>
-          <p className="mt-3 text-meru-sand/85">{inquiry.subtitle}</p>
+    <section
+      id="consulta"
+      className={cn("scroll-mt-24", card ? "bg-transparent py-0" : "bg-brand-primary py-20 text-white")}
+    >
+      <div className={cn("mx-auto max-w-2xl", card ? "" : "px-4 sm:px-6")}>
+        <div className={card ? "" : "text-center"}>
+          <h2 className={cn("text-3xl", card ? "text-brand-charcoal" : "text-white")}>{inquiry.title}</h2>
+          <p className={cn("mt-3", card ? "text-brand-muted" : "text-brand-sand/85")}>{inquiry.subtitle}</p>
           {relatedTitle ? (
-            <p className="mt-4 inline-block rounded-lg bg-white/15 px-4 py-2 text-sm text-meru-sand">
+            <p
+              className={cn(
+                "mt-4 inline-block rounded-lg px-4 py-2 text-sm",
+                card ? "bg-brand-ice text-brand-charcoal" : "bg-white/15 text-brand-sand"
+              )}
+            >
               Consultando por {relatedLabel(relatedKind)}:{" "}
-              <span className="font-semibold text-white">{relatedTitle}</span>
+              <span className={cn("font-semibold", card ? "text-brand-primary" : "text-white")}>
+                {relatedTitle}
+              </span>
             </p>
           ) : null}
         </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mt-10 space-y-5 rounded-xl bg-white p-6 shadow-[var(--shadow-elevated)] sm:p-8"
+          className={cn(
+            "space-y-5 rounded-xl bg-white p-6 sm:p-8",
+            card ? "mt-6 border border-brand-border" : "mt-10 shadow-[var(--shadow-elevated)]"
+          )}
           noValidate
         >
           <Input

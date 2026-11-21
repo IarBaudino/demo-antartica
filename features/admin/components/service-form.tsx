@@ -287,9 +287,9 @@ export function ServiceForm({ service }: ServiceFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-      <section className="rounded-xl border border-meru-border bg-white p-6 space-y-5">
-        <h2 className="text-lg text-meru-charcoal">Datos compartidos</h2>
-        <p className="text-sm text-meru-muted">
+      <section className="rounded-xl border border-brand-border bg-white p-6 space-y-5">
+        <h2 className="text-lg text-brand-charcoal">Datos compartidos</h2>
+        <p className="text-sm text-brand-muted">
           Slug, ubicación y categoría son comunes a ambas temporadas. El título y la descripción se
           cargan por temporada abajo.
         </p>
@@ -310,11 +310,11 @@ export function ServiceForm({ service }: ServiceFormProps) {
             </datalist>
           </div>
         </div>
-        <label className="flex items-center gap-2 text-sm text-meru-charcoal">
+        <label className="flex items-center gap-2 text-sm text-brand-charcoal">
           <input type="checkbox" className="rounded" {...register("active")} />
           Publicada (visible en el catálogo)
         </label>
-        <label className="flex items-center gap-2 text-sm text-meru-charcoal">
+        <label className="flex items-center gap-2 text-sm text-brand-charcoal">
           <input type="checkbox" className="rounded" {...register("featuredOnHome")} />
           Destacar en el home
         </label>

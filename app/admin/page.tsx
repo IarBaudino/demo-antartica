@@ -1,77 +1,39 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/dashboard/page-header";
-import { getAllServicesAdmin } from "@/features/excursions/lib/get-services";
-import { getAdminFirestore } from "@/lib/firebase/admin";
-import { Card, CardContent } from "@/components/ui/card";
-import { LayoutGrid, MessageSquare, ShoppingBag, Users } from "lucide-react";
+import { DEMO_INQUIRIES, POSTS, TRIPS, VESSELS } from "@/lib/demo/catalog";
 
-async function getCounts() {
-  const db = getAdminFirestore();
-  if (!db) return { inquiries: 0, users: 0, orders: 0 };
-
-  const [inquiries, users, orders] = await Promise.all([
-    db.collection("inquiries").where("status", "==", "nuevo").count().get(),
-    db.collection("users").count().get(),
-    db.collection("orders").count().get(),
-  ]);
-
-  return {
-    inquiries: inquiries.data().count,
-    users: users.data().count,
-    orders: orders.data().count,
-  };
-}
-
-export default async function AdminDashboardPage() {
-  const [services, counts] = await Promise.all([getAllServicesAdmin(), getCounts()]);
-  const active = services.filter((s) => s.active).length;
-
+export default function AdminDashboardPage() {
   const stats = [
-    { label: "Excursiones activas", value: active, href: "/admin/excursiones", icon: LayoutGrid },
-    { label: "Consultas nuevas", value: counts.inquiries, href: "/admin/consultas", icon: MessageSquare },
-    { label: "Usuarios", value: counts.users, href: "/admin/usuarios", icon: Users },
-    { label: "Órdenes", value: counts.orders, href: "/admin/ordenes", icon: ShoppingBag },
+    { label: "Viajes publicados", value: TRIPS.length, href: "/admin/viajes" },
+    { label: "Embarcaciones", value: VESSELS.length, href: "/admin/embarcaciones" },
+    { label: "Notas de blog", value: POSTS.length, href: "/admin/blog" },
+    { label: "Consultas nuevas", value: DEMO_INQUIRIES.filter((item) => item.status === "nuevo").length, href: "/admin/consultas" },
   ];
 
   return (
     <div>
       <PageHeader
-        title="Panel de administración"
-        description="Gestioná excursiones, contenido del sitio, consultas y usuarios desde un solo lugar."
+        title="Panel"
+        description="Viajes, tipos de experiencia, embarcaciones, blog y consultas."
       />
-
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map(({ label, value, href, icon: Icon }) => (
-          <Link key={href} href={href}>
-            <Card className="transition-shadow hover:shadow-[var(--shadow-card)]">
-              <CardContent className="flex items-center gap-4 pt-6">
-                <div className="rounded-lg bg-meru-ice p-3">
-                  <Icon className="h-5 w-5 text-meru-primary" aria-hidden />
-                </div>
-                <div>
-                  <p className="text-2xl text-meru-charcoal">{value}</p>
-                  <p className="text-sm text-meru-muted">{label}</p>
-                </div>
-              </CardContent>
-            </Card>
+        {stats.map((stat) => (
+          <Link key={stat.href} href={stat.href} className="rounded-xl border border-brand-border bg-white p-5">
+            <p className="font-heading text-4xl text-brand-primary">{stat.value}</p>
+            <p className="mt-1 text-sm text-brand-muted">{stat.label}</p>
           </Link>
         ))}
       </div>
-
-      <div className="mt-8 rounded-xl border border-meru-border bg-white p-6">
-        <h2 className="text-lg text-meru-charcoal">Accesos rápidos</h2>
-        <ul className="mt-4 flex flex-wrap gap-3 text-sm">
-          <li>
-            <Link href="/admin/excursiones/nueva" className="text-meru-secondary hover:underline">
-              + Nueva excursión
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/contenido" className="text-meru-secondary hover:underline">
-              Editar contenido web
-            </Link>
-          </li>
-        </ul>
+      <div className="mt-8 flex flex-wrap gap-4 text-sm">
+        <Link href="/admin/viajes/nuevo" className="font-medium text-brand-secondary">
+          + Nuevo viaje
+        </Link>
+        <Link href="/admin/blog/nuevo" className="font-medium text-brand-secondary">
+          + Nueva nota
+        </Link>
+        <Link href="/" className="font-medium text-brand-secondary">
+          Ver el sitio
+        </Link>
       </div>
     </div>
   );

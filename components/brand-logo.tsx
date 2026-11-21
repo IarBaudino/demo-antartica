@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { brand, brandLogoAlt } from "@/config/brand";
 import { cn } from "@/lib/utils";
 
-export const MERU_LOGO_SRC = "/logo.png";
+export const BRAND_LOGO_SRC = brand.logo.src;
 
 type BrandLogoProps = {
   /** `null` = sin link */
@@ -28,12 +29,13 @@ export function BrandLogo({
   priority = false,
   onClick,
 }: BrandLogoProps) {
+  const alt = brandLogoAlt();
   const image = (
     <Image
-      src={MERU_LOGO_SRC}
-      alt="Meru Viajes y Turismo"
-      width={240}
-      height={280}
+      src={brand.logo.src}
+      alt={alt}
+      width={brand.logo.width}
+      height={brand.logo.height}
       className={cn(sizeClass[size], "object-contain object-center", className)}
       priority={priority}
     />
@@ -48,7 +50,7 @@ export function BrandLogo({
       href={href}
       onClick={onClick}
       className="inline-flex shrink-0 items-center"
-      aria-label="Meru Viajes y Turismo — Inicio"
+      aria-label={`${alt} — Inicio`}
     >
       {image}
     </Link>

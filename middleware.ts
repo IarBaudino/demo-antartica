@@ -4,6 +4,10 @@ import { getToken } from "next-auth/jwt";
 import { getSessionCookieName } from "@/lib/auth/session-cookie";
 
 export async function middleware(request: NextRequest) {
+  if (!process.env.NEXTAUTH_SECRET) {
+    return NextResponse.next();
+  }
+
   const secret = process.env.NEXTAUTH_SECRET;
   const isSecure = request.nextUrl.protocol === "https:";
 

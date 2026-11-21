@@ -62,6 +62,7 @@ function mergeSettings(partial: Partial<SiteSettings> & { hero?: Partial<HeroFir
     },
     inquiry: { ...DEFAULT_SITE_SETTINGS.inquiry, ...partial.inquiry },
     footer: { ...DEFAULT_SITE_SETTINGS.footer, ...partial.footer },
+    social: { ...DEFAULT_SITE_SETTINGS.social, ...partial.social },
     googleReviews: {
       ...DEFAULT_SITE_SETTINGS.googleReviews!,
       ...partial.googleReviews,

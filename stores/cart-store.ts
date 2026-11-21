@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { brand } from "@/config/brand";
 import type { CartItem, DiscountOption } from "@/types";
 import { canAddQuantity } from "@/lib/excursions/stock";
 import {
@@ -257,7 +258,7 @@ export const useCartStore = create<CartState>()(
       totalPrice: () => get().items.reduce((acc, i) => acc + itemLineTotal(i), 0),
     }),
     {
-      name: "meru-cart-v10",
+      name: brand.cartStorageKey,
       partialize: (state) => ({
         items: state.items,
         holdOrderId: state.holdOrderId,

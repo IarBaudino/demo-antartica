@@ -40,7 +40,7 @@ export function HeroCarouselBackground({ media }: Props) {
       {media.map((item, i) => (
         <motion.div
           key={`${item.type}-${item.url}-${i}`}
-          className="absolute inset-0 overflow-hidden bg-meru-charcoal"
+          className="absolute inset-0 overflow-hidden bg-brand-charcoal"
           initial={{ opacity: i === 0 ? 1 : 0 }}
           animate={{ opacity: i === index ? 1 : 0 }}
           transition={{ duration: FADE_SECONDS, ease: "easeInOut" }}
@@ -58,7 +58,7 @@ export function HeroCarouselBackground({ media }: Props) {
                 onEnded={media.length > 1 ? goNext : undefined}
               />
             ) : (
-              <div className="h-full w-full bg-meru-charcoal" />
+              <div className="h-full w-full bg-brand-charcoal" />
             )
           ) : (
             <div

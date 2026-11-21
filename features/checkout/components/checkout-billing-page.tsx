@@ -145,13 +145,13 @@ export function CheckoutBillingPage() {
   }
 
   if (!hydrated) {
-    return <p className="text-meru-muted">Cargando…</p>;
+    return <p className="text-brand-muted">Cargando…</p>;
   }
 
   if (items.length === 0 && !holdOrderId) {
     return (
-      <div className="rounded-xl border border-dashed border-meru-border bg-white p-10 text-center">
-        <p className="text-meru-charcoal">No hay ítems para facturar.</p>
+      <div className="rounded-xl border border-dashed border-brand-border bg-white p-10 text-center">
+        <p className="text-brand-charcoal">No hay ítems para facturar.</p>
         <Link href="/carrito" className="mt-4 inline-block">
           <Button>Volver al carrito</Button>
         </Link>
@@ -163,20 +163,20 @@ export function CheckoutBillingPage() {
     <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
       <div className="space-y-6">
         {status !== "authenticated" ? (
-          <div className="rounded-xl border border-meru-secondary/30 bg-meru-ice/60 p-4 text-sm text-meru-charcoal">
+          <div className="rounded-xl border border-brand-secondary/30 bg-brand-ice/60 p-4 text-sm text-brand-charcoal">
             <p className="font-medium">¿Querés agilizar la compra?</p>
-            <p className="mt-1 text-meru-muted">
+            <p className="mt-1 text-brand-muted">
               Podés reservar sin cuenta. Si{" "}
               <Link
                 href={`/login?callbackUrl=${encodeURIComponent("/checkout")}`}
-                className="font-semibold text-meru-secondary underline"
+                className="font-semibold text-brand-secondary underline"
               >
                 iniciás sesión
               </Link>{" "}
               o{" "}
               <Link
                 href={`/registro?callbackUrl=${encodeURIComponent("/checkout")}`}
-                className="font-semibold text-meru-secondary underline"
+                className="font-semibold text-brand-secondary underline"
               >
                 creás una cuenta
               </Link>
@@ -192,12 +192,12 @@ export function CheckoutBillingPage() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6 rounded-xl border border-meru-border bg-white p-6"
+          className="space-y-6 rounded-xl border border-brand-border bg-white p-6"
           noValidate
         >
           <div>
-            <h2 className="text-lg text-meru-charcoal">Datos de facturación</h2>
-            <p className="mt-1 text-sm text-meru-muted">
+            <h2 className="text-lg text-brand-charcoal">Datos de facturación</h2>
+            <p className="mt-1 text-sm text-brand-muted">
               Los usamos para la reserva y la orden de servicio cuando se confirma el pago.
             </p>
           </div>
@@ -231,22 +231,22 @@ export function CheckoutBillingPage() {
         </form>
       </div>
 
-      <aside className="h-fit rounded-xl border border-meru-border bg-white p-5 lg:sticky lg:top-24">
-        <h2 className="text-lg text-meru-charcoal">Resumen</h2>
+      <aside className="h-fit rounded-xl border border-brand-border bg-white p-5 lg:sticky lg:top-24">
+        <h2 className="text-lg text-brand-charcoal">Resumen</h2>
         <ul className="mt-4 space-y-3 text-sm">
           {items.map((item) => (
             <li
               key={`${item.kind}-${item.serviceId}-${item.departureId ?? item.stayFrom ?? ""}`}
-              className="border-b border-meru-border/60 pb-3 last:border-0"
+              className="border-b border-brand-border/60 pb-3 last:border-0"
             >
-              <p className="font-medium text-meru-charcoal">{item.title}</p>
+              <p className="font-medium text-brand-charcoal">{item.title}</p>
               {item.kind === "package" && item.stayFrom && item.stayTo ? (
-                <p className="text-meru-muted">
+                <p className="text-brand-muted">
                   {item.stayFrom.split("-").reverse().join("/")} →{" "}
                   {item.stayTo.split("-").reverse().join("/")}
                 </p>
               ) : item.departureDate && item.departureTime ? (
-                <p className="text-meru-muted">
+                <p className="text-brand-muted">
                   {formatDepartureLabel({
                     date: item.departureDate,
                     time: item.departureTime,
@@ -254,7 +254,7 @@ export function CheckoutBillingPage() {
                 </p>
               ) : null}
               {item.passengers ? (
-                <p className="text-meru-muted">
+                <p className="text-brand-muted">
                   {formatPassengersSummary(
                     normalizeCartPassengers(item.passengers) ?? {
                       adult: item.quantity,
@@ -264,20 +264,20 @@ export function CheckoutBillingPage() {
                   )}
                 </p>
               ) : (
-                <p className="text-meru-muted">
+                <p className="text-brand-muted">
                   {item.quantity} pasajero{item.quantity === 1 ? "" : "s"}
                 </p>
               )}
-              <p className="mt-1 font-semibold text-meru-primary">
+              <p className="mt-1 font-semibold text-brand-primary">
                 {formatCurrencyARS(item.lineTotal ?? item.price * item.quantity)}
               </p>
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-lg text-meru-charcoal">
-          Total: <span className="font-semibold text-meru-primary">{formatCurrencyARS(total)}</span>
+        <p className="mt-4 text-lg text-brand-charcoal">
+          Total: <span className="font-semibold text-brand-primary">{formatCurrencyARS(total)}</span>
         </p>
-        <p className="mt-3 text-xs text-meru-muted">
+        <p className="mt-3 text-xs text-brand-muted">
           Al confirmar reservamos el cupo. Después coordinamos el pago por WhatsApp. Cuando lo
           confirmemos, se genera la orden de servicio.
         </p>

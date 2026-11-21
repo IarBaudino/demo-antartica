@@ -20,7 +20,7 @@ export function PackageCatalog({ packages }: Props) {
 
   if (filtered.length === 0) {
     return (
-      <p className="mt-12 rounded-xl border border-dashed border-meru-border bg-white py-16 text-center text-meru-muted">
+      <p className="mt-12 rounded-xl border border-dashed border-brand-border bg-white py-16 text-center text-brand-muted">
         No hay paquetes disponibles para esta temporada por ahora.
       </p>
     );

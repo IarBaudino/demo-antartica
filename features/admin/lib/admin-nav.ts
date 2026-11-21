@@ -1,20 +1,18 @@
 import {
-  FileText,
+  Compass,
   LayoutDashboard,
-  LayoutGrid,
   MessageSquare,
-  Package,
-  ShoppingBag,
-  Users,
+  Newspaper,
+  Ship,
+  Tag,
 } from "lucide-react";
 import type { DashboardNavItem } from "@/components/dashboard/dashboard-shell";
 
 export const ADMIN_NAV: DashboardNavItem[] = [
   { href: "/admin", label: "Resumen", icon: LayoutDashboard, exact: true },
-  { href: "/admin/excursiones", label: "Excursiones", icon: LayoutGrid },
-  { href: "/admin/paquetes", label: "Paquetes", icon: Package },
-  { href: "/admin/contenido", label: "Contenido web", icon: FileText },
+  { href: "/admin/viajes", label: "Viajes", icon: Compass },
+  { href: "/admin/tipos", label: "Tipos de viaje", icon: Tag },
+  { href: "/admin/embarcaciones", label: "Embarcaciones", icon: Ship },
+  { href: "/admin/blog", label: "Blog", icon: Newspaper },
   { href: "/admin/consultas", label: "Consultas", icon: MessageSquare },
-  { href: "/admin/usuarios", label: "Usuarios", icon: Users },
-  { href: "/admin/ordenes", label: "Órdenes", icon: ShoppingBag },
 ];

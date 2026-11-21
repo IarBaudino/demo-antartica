@@ -1,10 +1,11 @@
+import { brand } from "@/config/brand";
 import type { SiteSettings } from "@/types/site-settings";
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   hero: {
-    eyebrow: "Ushuaia · Tierra del Fuego",
-    title: "AVENTURATE EN EL FIN DEL MUNDO CON MERU",
-    subtitle: "VIAJES Y TURISMO",
+    eyebrow: brand.location.line,
+    title: "Antártida y Ártico",
+    subtitle: "El viaje empieza mucho antes de embarcar",
     ctaPrimaryLabel: "Ver excursiones",
     ctaPrimaryHref: "/#excursiones",
     ctaSecondaryLabel: "Consultanos",
@@ -13,9 +14,8 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     backgroundMedia: [],
   },
   excursionsPreview: {
-    title: "Nuestras Excursiones",
-    description:
-      "Descubrí experiencias en Ushuaia y Tierra del Fuego. Todas las excursiones se publican desde nuestro catálogo oficial.",
+    title: "Viajes",
+    description: "Expediciones a la Antártida y al Ártico, organizadas por destino y tipo de experiencia.",
   },
   packagesPreview: {
     title: "Nuestros Paquetes",
@@ -23,37 +23,39 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
       "Combinaciones pensadas para aprovechar mejor tu estadía. Armamos el itinerario según tus fechas.",
   },
   about: {
-    title: "Sobre Nosotros",
-    quote: "Descubre la magia del Fin del Mundo con nosotros",
+    title: "Nosotros",
+    quote: "Diseñamos expediciones polares con tiempo, criterio y los barcos adecuados.",
     values: [
       {
-        title: "Nuestra Misión",
-        text: "Crear experiencias únicas y memorables en Ushuaia, conectando a los viajeros con la naturaleza y la cultura local de manera sostenible.",
+        title: "Criterio",
+        text: "Recomendamos un viaje cuando encaja con la época, el ritmo y lo que la persona quiere ver.",
       },
       {
-        title: "Nuestra Visión",
-        text: "Ser la referencia en turismo aventura en Tierra del Fuego, ofreciendo las mejores excursiones y experiencias para nuestros visitantes.",
+        title: "Los barcos",
+        text: "Cada salida está ligada a una embarcación concreta: capacidad, clase de hielo y estilo de navegación.",
       },
       {
-        title: "Nuestros Valores",
-        text: "Compromiso con la excelencia, respeto por la naturaleza y pasión por brindar experiencias auténticas y seguras.",
+        title: "Acompañamiento",
+        text: "La consulta queda registrada con el viaje que la persona estaba mirando, y se responde desde el panel.",
       },
     ],
-    closingText:
-      "En Turismo Meru, nos dedicamos a hacer realidad tus sueños de aventura en el Fin del Mundo. Con años de experiencia y un equipo apasionado, te garantizamos experiencias únicas y seguras en los paisajes más impresionantes de Ushuaia y Tierra del Fuego.",
+    closingText: `${brand.agencyName} presenta viajes a la Antártida y al Ártico. El equipo actualiza destinos, barcos y notas desde el panel, sin depender de un desarrollador para el día a día.`,
   },
   inquiry: {
-    title: "¿Tienes alguna consulta?",
-    subtitle: "Estamos aquí para ayudarte a planificar tu próxima aventura",
+    title: "Consultanos por un viaje",
+    subtitle: "Contanos la época, el destino y cuántos viajan. Te respondemos con opciones concretas.",
   },
   footer: {
-    brandName: "Meru Viajes y Turismo",
-    tagline:
-      "Aventurate en el Fin del Mundo. Excursiones y experiencias únicas en Ushuaia, Tierra del Fuego.",
-    address: "Ushuaia, Tierra del Fuego, Argentina",
-    email: "info@meruviajes.tur.ar",
-    phoneLabel: "(2901) 588864",
-    phoneNumber: "2901588864",
+    brandName: brand.agencyName,
+    tagline: "Expediciones a la Antártida y al Ártico. Viajes, embarcaciones y consulta directa.",
+    address: brand.location.address,
+    email: brand.email,
+    phoneLabel: brand.phoneLabel,
+    phoneNumber: brand.phoneDigits,
+  },
+  social: {
+    instagramUrl: brand.social.instagramUrl,
+    instagramHandle: brand.social.instagramHandle,
   },
   googleReviews: {
     enabled: false,

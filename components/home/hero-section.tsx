@@ -25,7 +25,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
   return (
     <section
-      className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-meru-charcoal"
+      className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-brand-charcoal"
       aria-label="Presentación"
     >
       {backgroundMedia.length > 0 ? (
@@ -46,7 +46,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-4 font-sans text-sm font-medium uppercase tracking-[0.28em] text-meru-sand/90"
+          className="mb-4 font-sans text-sm font-medium uppercase tracking-[0.28em] text-brand-sand/90"
         >
           {hero.eyebrow}
         </motion.p>
@@ -55,7 +55,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-5xl font-normal leading-[1.08] text-meru-sand md:leading-[1.06]"
+          className="text-5xl font-normal leading-[1.08] text-brand-sand md:leading-[1.06]"
         >
           {hero.title}
         </motion.h1>
@@ -64,7 +64,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="font-accent mt-6 text-2xl tracking-wide text-meru-sand"
+          className="font-accent mt-6 text-2xl tracking-wide text-brand-sand"
         >
           {hero.subtitle}
         </motion.p>
@@ -79,7 +79,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             href={hero.ctaPrimaryHref}
             className={cn(
               btnBase,
-              "bg-meru-secondary text-white shadow-md hover:bg-meru-secondary-hover"
+              "bg-brand-secondary text-white shadow-md hover:bg-brand-secondary-hover"
             )}
           >
             {hero.ctaPrimaryLabel}
@@ -88,7 +88,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             href={hero.ctaSecondaryHref}
             className={cn(
               btnBase,
-              "border-2 border-meru-sand/90 text-meru-sand hover:bg-white/10"
+              "border-2 border-brand-sand/90 text-brand-sand hover:bg-white/10"
             )}
           >
             {hero.ctaSecondaryLabel}
@@ -98,7 +98,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
       <a
         href="#excursiones"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-meru-sand/75 transition-colors hover:text-meru-sand"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-brand-sand/75 transition-colors hover:text-brand-sand"
         aria-label="Ir a excursiones"
       >
         <ChevronDown className="h-8 w-8 animate-bounce" />

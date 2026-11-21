@@ -47,8 +47,12 @@ export interface SiteSettings {
     email: string;
     /** Texto visible, ej. (2901) 588864 */
     phoneLabel: string;
-    /** Solo dígitos para tel:/WhatsApp, ej. 2901588864 */
+    /** Solo dígitos para tel:/WhatsApp */
     phoneNumber?: string;
+  };
+  social: {
+    instagramUrl: string;
+    instagramHandle: string;
   };
   googleReviews?: {
     enabled: boolean;

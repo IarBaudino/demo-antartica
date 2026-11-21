@@ -9,12 +9,12 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants = {
   primary:
-    "bg-meru-primary text-white hover:bg-meru-primary-dark focus-visible:ring-meru-primary",
+    "bg-brand-primary text-white hover:bg-brand-primary-dark focus-visible:ring-brand-primary",
   secondary:
-    "bg-meru-secondary text-white hover:bg-meru-secondary-hover focus-visible:ring-meru-secondary",
+    "bg-brand-secondary text-white hover:bg-brand-secondary-hover focus-visible:ring-brand-secondary",
   outline:
-    "border-2 border-meru-primary text-meru-primary hover:bg-meru-ice",
-  ghost: "text-meru-primary hover:bg-meru-ice",
+    "border-2 border-brand-primary text-brand-primary hover:bg-brand-ice",
+  ghost: "text-brand-primary hover:bg-brand-ice",
 };
 
 const sizes = {
